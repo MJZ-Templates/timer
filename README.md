@@ -1,8 +1,8 @@
 # Simple Timer & Stopwatch Mini-Project
 
-<div style="display: flex; justify-content: center; gap: 20px;">
-  <img src="./images/stopwatch.png" alt="Stopwatch" width="150" />
-  <img src="./images/timer.png" alt="Timer" width="150" />
+<div style="display: flex; gap: 20px; align-items: flex-start">
+  <img src="./images/stopwatch.png" alt="Stopwatch" width="250" />
+  <img src="./images/timer.png" alt="Timer" width="250" />
 </div>
 
 This project is a **full-stack** application that provides simple timer and stopwatch functionalities using **React** (front-end) and **Spring** (back-end).
