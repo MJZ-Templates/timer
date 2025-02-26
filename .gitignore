@@ -1,0 +1,42 @@
+# 공통
+.DS_Store
+*.log
+*.tmp
+*.temp
+
+# Back-end (Spring)
+back/target/
+back/.mvn/
+back/*.jar
+back/*.war
+back/*.ear
+back/*.class
+back/.springBeans
+back/.idea/
+back/*.iml
+back/*.iws
+back/*.ipr
+back/.classpath
+back/.project
+back/.settings/
+
+# Front-end (React)
+front/node_modules/
+front/build/
+front/.env
+front/.env.local
+front/.env.development.local
+front/.env.test.local
+front/.env.production.local
+front/npm-debug.log*
+front/yarn-debug.log*
+front/yarn-error.log*
+front/.pnp
+front/.pnp.js
+front/coverage/
+
+# IDE 관련
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
