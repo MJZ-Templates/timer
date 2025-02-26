@@ -1,8 +1,9 @@
 # Simple Timer & Stopwatch Mini-Project
 
-| Stopwatch                                                        | Timer                                                    |
-| ---------------------------------------------------------------- | -------------------------------------------------------- |
-| <img src="./images/stopwatch.png" width="150" alt="Stopwatch" /> | <img src="./images/timer.png" width="150" alt="Timer" /> |
+<div style="display: flex; justify-content: center; gap: 20px;">
+  <img src="./images/stopwatch.png" alt="Stopwatch" width="150" />
+  <img src="./images/timer.png" alt="Timer" width="150" />
+</div>
 
 This project is a **full-stack** application that provides simple timer and stopwatch functionalities using **React** (front-end) and **Spring** (back-end).
 It also integrates **MongoDB** to manage data in a flexible way, allowing you to easily adapt to schema changes.
