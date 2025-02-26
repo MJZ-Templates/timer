@@ -1,8 +1,8 @@
-package goorm.dev.server.timer.app;
+package goorm.dev.server.timer.timer.app;
 
-import goorm.dev.server.timer.app.dto.TimerDto;
-import goorm.dev.server.timer.repo.mongo.TimerRepository;
-import goorm.dev.server.timer.repo.mongo.entity.Timer;
+import goorm.dev.server.timer.timer.app.dto.TimerDto;
+import goorm.dev.server.timer.timer.repo.mongo.TimerRepository;
+import goorm.dev.server.timer.timer.repo.mongo.entity.Timer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

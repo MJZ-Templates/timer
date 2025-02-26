@@ -1,4 +1,4 @@
-package goorm.dev.server.timer.app.dto;
+package goorm.dev.server.timer.timer.app.dto;
 
 public record TimerDto(
         long entireDuration,

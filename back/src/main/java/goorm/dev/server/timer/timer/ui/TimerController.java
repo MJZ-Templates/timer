@@ -1,8 +1,8 @@
-package goorm.dev.server.timer.ui;
+package goorm.dev.server.timer.timer.ui;
 
-import goorm.dev.server.timer.app.TimerService;
-import goorm.dev.server.timer.app.dto.TimerDto;
-import goorm.dev.server.timer.repo.mongo.entity.Timer;
+import goorm.dev.server.timer.timer.app.TimerService;
+import goorm.dev.server.timer.timer.app.dto.TimerDto;
+import goorm.dev.server.timer.timer.repo.mongo.entity.Timer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

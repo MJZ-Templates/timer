@@ -1,4 +1,4 @@
-package goorm.dev.server.timer.repo.mongo.entity;
+package goorm.dev.server.timer.timer.repo.mongo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
