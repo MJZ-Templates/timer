@@ -19,15 +19,7 @@ It also integrates **MongoDB** to manage data in a flexible way, allowing you to
 
 ---
 
-## 2. Why MongoDB?
-
-This project is designed to serve as a **template**, so you can conveniently modify data schemas.  
-MongoDB’s flexible document structure makes it easy to adapt your schema without extensive migrations.  
-However, **if you require relational models**, you can adapt this project to use **JPA** with a relational database (e.g., MySQL, PostgreSQL) instead of MongoDB.
-
----
-
-## 3. Purpose
+## 2. Purpose
 
 1. **Practice Full-Stack Development**: This mini-project allows you to experience the full process—front-end, back-end, and database integration.
 2. **Learn API Communication**: Understand how to make HTTP requests (GET, POST, etc.) to a Spring-based back-end from a React application.
@@ -35,12 +27,21 @@ However, **if you require relational models**, you can adapt this project to use
 
 ---
 
-## 4. Main Features
+## 3. Main Features
 
 - **Timer & Stopwatch**: Start, pause, and reset functionalities.
 - **API Communication**: Data is persisted and retrieved through RESTful endpoints.
 - **MongoDB Integration**: Time records and other data can be easily stored and modified.
 - **Styled Components**: All UI elements are styled for clarity and maintainability.
+
+
+---
+
+## 4. Why MongoDB?
+
+This project is designed to serve as a **template**, so you can conveniently modify data schemas.  
+MongoDB’s flexible document structure makes it easy to adapt your schema without extensive migrations.  
+However, **if you require relational models**, you can adapt this project to use **JPA** with a relational database (e.g., MySQL, PostgreSQL) instead of MongoDB.
 
 ---
 
@@ -80,9 +81,3 @@ sudo systemctl status mongodb
 mongo
 
 ```
-
----
-
-## 7. Contributing
-
-Contributions are welcome! Please fork the repository and open a pull request if you have suggestions or improvements.
