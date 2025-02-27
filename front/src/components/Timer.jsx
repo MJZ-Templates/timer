@@ -37,7 +37,7 @@ const Timer = ({ onTitleClick }) => {
 
   return (
     <Container>
-      <h1 onClick={onTitleClick}>Timer</h1>
+      <Title onClick={onTitleClick}>Timer</Title>
       <form onSubmit={handleSubmit}>
         <NumberContainer>
           <NumberInput
@@ -72,6 +72,10 @@ const Timer = ({ onTitleClick }) => {
     </Container>
   );
 };
+
+const Title = styled.h1`
+  cursor: pointer;
+`;
 
 const Container = styled.div`
   height: 100vh;

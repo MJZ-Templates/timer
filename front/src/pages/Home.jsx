@@ -3,6 +3,29 @@ import styled from "styled-components";
 import Timer from "../components/Timer";
 import Stopwatch from "../components/Stopwatch";
 
+const Home = () => {
+  const [showTimer, setShowTimer] = useState(true);
+
+  const toggleModule = () => {
+    setShowTimer(!showTimer);
+  };
+
+  return (
+    <CardContainer>
+      <Card
+        style={{ transform: showTimer ? "rotateY(0deg)" : "rotateY(180deg)" }}
+      >
+        <TimerFace>
+          <Timer onTitleClick={toggleModule} />
+        </TimerFace>
+        <StopwatchFace>
+          <Stopwatch onTitleClick={toggleModule} />
+        </StopwatchFace>
+      </Card>
+    </CardContainer>
+  );
+};
+
 const CardContainer = styled.div`
   perspective: 1000px;
 `;
@@ -34,28 +57,5 @@ const TimerFace = styled(CardFace)`
 const StopwatchFace = styled(CardFace)`
   transform: rotateY(180deg);
 `;
-
-const Home = () => {
-  const [showTimer, setShowTimer] = useState(true);
-
-  const toggleModule = () => {
-    setShowTimer(!showTimer);
-  };
-
-  return (
-    <CardContainer>
-      <Card
-        style={{ transform: showTimer ? "rotateY(0deg)" : "rotateY(180deg)" }}
-      >
-        <TimerFace>
-          <Timer onTitleClick={toggleModule} />
-        </TimerFace>
-        <StopwatchFace>
-          <Stopwatch onTitleClick={toggleModule} />
-        </StopwatchFace>
-      </Card>
-    </CardContainer>
-  );
-};
 
 export default Home;

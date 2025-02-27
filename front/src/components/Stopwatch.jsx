@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaPlay, FaPause, FaFlag, FaRedo } from "react-icons/fa";
 
@@ -58,7 +58,7 @@ const Stopwatch = ({ onTitleClick }) => {
 
   return (
     <Container>
-      <h1 onClick={onTitleClick}>Stopwatch</h1>
+      <Title onClick={onTitleClick}>Stopwatch</Title>
       <Circle>
         <RotatingDot rotation={rotation} />
         <TimeText>{formatLapTime(time)}</TimeText>
@@ -101,6 +101,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 50px;
+`;
+
+const Title = styled.h1`
+  cursor: pointer;
 `;
 
 const Circle = styled.div`
