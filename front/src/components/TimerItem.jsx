@@ -1,4 +1,4 @@
-import PropTypes from "prop-types"; // ✅ import 추가
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { FaClock, FaPause, FaPlay, FaTrash } from "react-icons/fa";
 import styled from "styled-components";
@@ -67,7 +67,6 @@ TimerItem.propTypes = {
 
 export default TimerItem;
 
-// styled-components
 const ItemContainer = styled.div`
   display: flex;
   align-items: center;
