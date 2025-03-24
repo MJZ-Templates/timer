@@ -1,98 +1,122 @@
+import PropTypes from "prop-types"; // ✅ import 추가
+import { useEffect, useState } from "react";
+import { FaClock, FaPause, FaPlay, FaTrash } from "react-icons/fa";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import useTimerStore from "../store/timerStore";
-import { useState, useEffect } from "react";
-import { updateTimer } from "../api/timerApi";
-import { FaPlay, FaPause, FaTrash } from "react-icons/fa";
 
-const durationFormat = (duration) => {
-  const hours = Math.floor(duration / 3600000);
-  const minutes = Math.floor((duration % 3600000) / 60000);
-  const seconds = Math.floor((duration % 60000) / 1000);
-
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
-    2,
-    "0"
-  )}:${String(seconds).padStart(2, "0")}`;
-};
-
-const TimerItem = ({ timer }) => {
-  const [remainingTime, setRemainingTime] = useState(timer.duration);
-  const [isRunning, setIsRunning] = useState(false);
-  const removeTimer = useTimerStore((state) => state.removeTimer);
-  const updateTimerInStore = useTimerStore((state) => state.updateTimer);
-
-  useEffect(() => {
-    let interval;
-    if (isRunning && remainingTime > 0) {
-      interval = setInterval(() => {
-        setRemainingTime((prevTime) => prevTime - 10);
-      }, 10);
-    } else if (remainingTime <= 0) {
-      clearInterval(interval);
-      setIsRunning(false);
-
-      const updateTimerAsync = async () => {
-        updateTimerInStore(timer.id, { duration: 0 });
-        await updateTimer(timer.id, { duration: 0 });
-      };
-
-      updateTimerAsync();
-    }
-    return () => clearInterval(interval);
-  }, [isRunning, remainingTime, timer.id, updateTimerInStore]);
-
-  const handleToggle = async () => {
-    if (isRunning) {
-      updateTimerInStore(timer.id, { duration: remainingTime });
-      await updateTimer(timer.id, { duration: remainingTime });
-    }
-    setIsRunning((prev) => !prev);
-  };
-
-  return (
-    <TimerContainer>
-      <StyledButton onClick={handleToggle} disabled={remainingTime <= 10}>
-        {isRunning ? <FaPause /> : <FaPlay />}
-      </StyledButton>
-      <StyledText>{durationFormat(remainingTime)}</StyledText>
-      <StyledButton onClick={() => removeTimer(timer.id)}>
-        <FaTrash />
-      </StyledButton>
-    </TimerContainer>
-  );
-};
 
 TimerItem.propTypes = {
   timer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     name: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
   }).isRequired,
 };
 
+const padNumber = (num) => String(num).padStart(2, "0");
+
+const TimerItem = ({ timer }) => {
+  const [remaining, setRemaining] = useState(timer.duration);
+  const [isRunning, setIsRunning] = useState(false);
+  const {removeTimer, updateTimer} = useTimerStore();
+
+  useEffect(() => {
+    let interval;
+    if (isRunning && remaining > 0) {
+      interval = setInterval(() => {
+        setRemaining((prev) => Math.max(0, prev - 1000));
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isRunning, remaining]);
+
+  const toggleTimer = () => {
+    if (isRunning) {
+      updateTimer(timer.id, { duration: remaining });
+    }
+    setIsRunning((prev) => !prev);
+  };
+
+  const handleDelete = () => {
+    removeTimer(timer.id);
+  };
+
+  const hours = Math.floor(remaining / 3600000);
+  const minutes = Math.floor((remaining % 3600000) / 60000);
+  const seconds = Math.floor((remaining % 60000) / 1000);
+
+  return (
+    <ItemContainer onClick={toggleTimer}>
+      <IconWrapper><FaClock /></IconWrapper>
+      <TextContainer>
+        <TimerName>{timer.name}</TimerName>
+        <TimerTime>
+          {padNumber(hours)}:{padNumber(minutes)}:{padNumber(seconds)}
+        </TimerTime>
+      </TextContainer>
+      <ButtonGroup>
+        <IconButton onClick={toggleTimer} title={isRunning ? "Pause" : "Start"}>
+          {isRunning ? <FaPause /> : <FaPlay />}
+        </IconButton>
+        <IconButton onClick={handleDelete} title="Delete">
+          <FaTrash />
+        </IconButton>
+      </ButtonGroup>
+    </ItemContainer>
+  );
+};
+
 export default TimerItem;
 
-const TimerContainer = styled.div`
+// styled-components
+const ItemContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 5px 0;
-  width: 250px;
+  justify-content: space-between;
+  background-color: #222;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 255, 171, 0.1);
+  cursor: pointer;
 `;
 
-const StyledButton = styled.button`
+const IconWrapper = styled.div`
+  font-size: 1.5rem;
+  color: #00FFAB;
+  margin-right: 12px;
+`;
+
+const TextContainer = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
+const TimerName = styled.div`
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+`;
+
+const TimerTime = styled.div`
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  color: #00FFAB;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+const IconButton = styled.button`
   background: none;
   border: none;
-  font-size: 20px;
-  margin-left: 5px;
-  margin-right: 5px;
-`;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
 
-const StyledText = styled.p`
-  text-align: center;
-  font-size: 20px;
+  &:hover {
+    color: #00FFAB;
+  }
 `;

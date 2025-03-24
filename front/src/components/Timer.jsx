@@ -1,8 +1,13 @@
+import PropTypes from "prop-types"; // ✅ import 추가
 import { useState } from "react";
-import useTimerStore from "../store/timerStore";
-import TimerList from "../components/TimerList";
-import styled from "styled-components";
 import { FaPlus } from "react-icons/fa";
+import styled from "styled-components";
+import TimerList from "../components/TimerList";
+import useTimerStore from "../store/timerStore";
+
+Timer.propTypes = {
+  onTitleClick: PropTypes.func.isRequired,
+};
 
 const padNumber = (num) => String(num).padStart(2, "0");
 
@@ -37,78 +42,101 @@ const Timer = ({ onTitleClick }) => {
 
   return (
     <Container>
-      <Title onClick={onTitleClick}>Timer</Title>
-      <form onSubmit={handleSubmit}>
+      <Title onClick={onTitleClick}>⏳ Timer</Title>
+      <Form onSubmit={handleSubmit}>
         <NumberContainer>
-          <NumberInput
+          <StyledInput
             type="number"
-            placeholder="Hours"
             value={padNumber(hours)}
             onChange={(e) => setHours(e.target.value)}
             min="0"
           />
-          <StyledText>:</StyledText>
-          <NumberInput
+          <StyledColon>:</StyledColon>
+          <StyledInput
             type="number"
-            placeholder="Minutes"
             value={padNumber(minutes)}
             onChange={(e) => setMinutes(e.target.value)}
             min="0"
           />
-          <StyledText>:</StyledText>
-          <NumberInput
+          <StyledColon>:</StyledColon>
+          <StyledInput
             type="number"
-            placeholder="Seconds"
             value={padNumber(seconds)}
             onChange={(e) => setSeconds(e.target.value)}
             min="0"
           />
-          <StyledButton type="submit">
+          <AddButton type="submit">
             <FaPlus />
-          </StyledButton>
+          </AddButton>
         </NumberContainer>
-      </form>
+      </Form>
       <TimerList />
     </Container>
   );
 };
 
-const Title = styled.h1`
-  cursor: pointer;
-`;
+export default Timer;
 
 const Container = styled.div`
   height: 100vh;
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 40px;
+  background: #0d0d0d;
+  color: white;
+`;
+
+const Title = styled.h1`
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #00FFAB;
+`;
+
+const Form = styled.form`
+  margin-top: 20px;
 `;
 
 const NumberContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  font-size: 30px;
-`;
-
-const NumberInput = styled.input`
-  width: 50px;
-  text-align: center;
-  border: none;
-  font-size: 30px;
-`;
-
-const StyledButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
   align-items: center;
+  background-color: #1a1a1a;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 255, 171, 0.2);
 `;
 
-const StyledText = styled.div`
-  padding-right: 10px;
+const StyledInput = styled.input`
+  width: 60px;
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Courier New', monospace;
+  background: transparent;
+  border: none;
+  color: #00FFAB;
+  outline: none;
 `;
 
-export default Timer;
+const StyledColon = styled.span`
+  font-size: 2rem;
+  padding: 0 10px;
+  color: #ffffff;
+`;
+
+const AddButton = styled.button`
+  background-color: #00FFAB;
+  color: black;
+  border: none;
+  margin-left: 12px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #2effc2;
+  }
+`;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Timer from "../components/Timer";
 import Stopwatch from "../components/Stopwatch";
+import Timer from "../components/Timer";
 
 const Home = () => {
   const [showTimer, setShowTimer] = useState(true);
@@ -31,7 +31,7 @@ const CardContainer = styled.div`
 `;
 
 const Card = styled.div`
-  width: 300px;
+  width: 400px;
   height: 200px;
   margin: 50px auto;
   transition: transform 0.6s;

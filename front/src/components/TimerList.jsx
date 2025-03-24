@@ -1,7 +1,7 @@
 import { useEffect } from "react";
+import styled from "styled-components";
 import useTimerStore from "../store/timerStore";
 import TimerItem from "./TimerItem";
-import styled from "styled-components";
 
 const TimerList = () => {
   const { timers, loadTimers } = useTimerStore();
@@ -16,7 +16,9 @@ const TimerList = () => {
         .slice()
         .reverse()
         .map((timer) => (
-          <TimerItem key={timer.id} timer={timer} />
+          <ListItemWrapper key={timer.id}>
+            <TimerItem timer={timer} />
+          </ListItemWrapper>
         ))}
     </StyledList>
   );
@@ -29,4 +31,12 @@ const StyledList = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-top: 20px;
+`;
+
+const ListItemWrapper = styled.div`
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 255, 171, 0.3);
+  }
 `;

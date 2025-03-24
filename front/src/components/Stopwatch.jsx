@@ -1,6 +1,11 @@
-import { useState, useEffect } from "react";
+import PropTypes from "prop-types"; // ✅ 추가
+import { useEffect, useState } from "react";
+import { FaFlag, FaPause, FaPlay, FaRedo } from "react-icons/fa";
 import styled from "styled-components";
-import { FaPlay, FaPause, FaFlag, FaRedo } from "react-icons/fa";
+
+Stopwatch.propTypes = {
+  onTitleClick: PropTypes.func.isRequired,
+};
 
 const Stopwatch = ({ onTitleClick }) => {
   const [time, setTime] = useState(0);
@@ -25,18 +30,18 @@ const Stopwatch = ({ onTitleClick }) => {
     return () => clearInterval(interval);
   }, [isRunning]);
 
-  const handleStartStop = async () => {
+  const handleStartStop = () => {
     setIsRunning((prev) => !prev);
   };
 
-  const handleLap = async () => {
+  const handleLap = () => {
     const lapDuration = time - lastLapTime;
     const newLaps = [...laps, lapDuration];
     setLaps(newLaps);
     setLastLapTime(time);
   };
 
-  const handleReset = async () => {
+  const handleReset = () => {
     setTime(0);
     setLaps([]);
     setRotation(0);
@@ -58,21 +63,21 @@ const Stopwatch = ({ onTitleClick }) => {
 
   return (
     <Container>
-      <Title onClick={onTitleClick}>Stopwatch</Title>
-      <Circle>
+      <Title onClick={onTitleClick}>⏱ Stopwatch</Title>
+      <Circle onClick={handleStartStop}>
         <RotatingDot rotation={rotation} />
         <TimeText>{formatLapTime(time)}</TimeText>
       </Circle>
       <ButtonContainer>
-        <StyledButton onClick={handleStartStop}>
+        <StyledButton onClick={handleStartStop} color="#00FFAB">
           {isRunning ? <FaPause /> : <FaPlay />}
         </StyledButton>
         {isRunning ? (
-          <StyledButton onClick={handleLap}>
+          <StyledButton onClick={handleLap} color="#FFD700">
             <FaFlag />
           </StyledButton>
         ) : (
-          <StyledButton onClick={handleReset}>
+          <StyledButton onClick={handleReset} color="#FF6B6B">
             <FaRedo />
           </StyledButton>
         )}
@@ -81,11 +86,10 @@ const Stopwatch = ({ onTitleClick }) => {
         {laps.map((lap, index) => (
           <LapItem
             key={index}
-            color={
-              lap === minLap ? "#32CD32" : lap === maxLap ? "#FF4500" : "black"
-            }
+            isMin={lap === minLap}
+            isMax={lap === maxLap}
           >
-            {formatLapTime(lap)}
+            #{index + 1} - {formatLapTime(lap)}
           </LapItem>
         ))}
       </LapList>
@@ -97,70 +101,92 @@ export default Stopwatch;
 
 const Container = styled.div`
   height: 100vh;
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 40px;
+  background: #0d0d0d;
+  color: white;
 `;
 
 const Title = styled.h1`
+  font-family: 'Orbitron', sans-serif;
+  color: #00FFAB;
+  font-size: 2rem;
   cursor: pointer;
 `;
 
 const Circle = styled.div`
-  width: 250px; /* 원의 크기를 키움 */
-  height: 250px; /* 원의 크기를 키움 */
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-  border: 4px solid #000;
+  border: 5px solid #00FFAB;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 20px 0;
+  box-shadow: 0 0 30px rgba(0, 255, 171, 0.3);
+  cursor: pointer;
 `;
 
 const RotatingDot = styled.div`
-  width: 10px;
-  height: 10px;
-  background-color: red;
+  width: 12px;
+  height: 12px;
+  background-color: #FFD700;
   border-radius: 50%;
   position: absolute;
   left: 50%;
-  transform-origin: center bottom; /* 회전 중심을 아래쪽으로 설정 */
-  transform: ${({ rotation }) =>
-    `rotate(${rotation}deg) translate(-50%, -125px)`}; /* 시계 방향 회전 및 위치 조정 */
+  transform-origin: center bottom;
+  transform: ${({ rotation }) => `rotate(${rotation}deg) translate(-50%, -135px)`};
+  transition: transform 0.01s linear;
 `;
 
 const TimeText = styled.div`
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 2rem;
+  font-family: 'Courier New', monospace;
+  color: #00FFAB;
 `;
 
 const ButtonContainer = styled.div`
   margin-top: 20px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
 `;
 
 const StyledButton = styled.button`
-  background: none;
+  background-color: ${({ color }) => color || "#333"};
+  color: black;
   border: none;
-  font-size: 20px;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  padding: 12px 16px;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
 `;
 
 const LapList = styled.ul`
   margin-top: 20px;
   list-style: none;
   padding: 0;
-  width: 200px;
-  text-align: center;
+  width: 240px;
+  max-height: 300px;
   overflow-y: auto;
-  max-height: 400px;
 `;
 
 const LapItem = styled.li`
-  font-size: 24px;
-  font-weight: bold;
-  color: ${({ color }) => color};
-  padding: 5px;
+  font-size: 1rem;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background-color: ${({ isMin, isMax }) =>
+    isMin ? "#32cd32" : isMax ? "#ff6347" : "#222"};
+  color: white;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
 `;
