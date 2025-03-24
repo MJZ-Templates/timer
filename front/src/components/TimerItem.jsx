@@ -4,15 +4,6 @@ import { FaClock, FaPause, FaPlay, FaTrash } from "react-icons/fa";
 import styled from "styled-components";
 import useTimerStore from "../store/timerStore";
 
-
-TimerItem.propTypes = {
-  timer: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    name: PropTypes.string.isRequired,
-    duration: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
 const padNumber = (num) => String(num).padStart(2, "0");
 
 const TimerItem = ({ timer }) => {
@@ -64,6 +55,14 @@ const TimerItem = ({ timer }) => {
       </ButtonGroup>
     </ItemContainer>
   );
+};
+
+TimerItem.propTypes = {
+  timer: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    name: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default TimerItem;

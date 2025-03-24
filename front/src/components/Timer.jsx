@@ -1,13 +1,9 @@
-import PropTypes from "prop-types"; // ✅ import 추가
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import styled from "styled-components";
 import TimerList from "../components/TimerList";
 import useTimerStore from "../store/timerStore";
-
-Timer.propTypes = {
-  onTitleClick: PropTypes.func.isRequired,
-};
 
 const padNumber = (num) => String(num).padStart(2, "0");
 
@@ -73,6 +69,10 @@ const Timer = ({ onTitleClick }) => {
       <TimerList />
     </Container>
   );
+};
+
+Timer.propTypes = {
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default Timer;

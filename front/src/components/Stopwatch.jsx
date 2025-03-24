@@ -1,11 +1,7 @@
-import PropTypes from "prop-types"; // ✅ 추가
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { FaFlag, FaPause, FaPlay, FaRedo } from "react-icons/fa";
 import styled from "styled-components";
-
-Stopwatch.propTypes = {
-  onTitleClick: PropTypes.func.isRequired,
-};
 
 const Stopwatch = ({ onTitleClick }) => {
   const [time, setTime] = useState(0);
@@ -95,6 +91,10 @@ const Stopwatch = ({ onTitleClick }) => {
       </LapList>
     </Container>
   );
+};
+
+Stopwatch.propTypes = {
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default Stopwatch;
