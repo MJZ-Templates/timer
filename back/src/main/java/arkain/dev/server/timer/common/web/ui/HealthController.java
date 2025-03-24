@@ -1,4 +1,4 @@
-package goorm.dev.server.timer.common.web.ui;
+package arkain.dev.server.timer.common.web.ui;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

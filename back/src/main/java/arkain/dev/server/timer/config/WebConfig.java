@@ -1,6 +1,6 @@
-package goorm.dev.server.timer.config;
+package arkain.dev.server.timer.config;
 
-import goorm.dev.server.timer.common.interceptor.LogInterceptor;
+import arkain.dev.server.timer.common.interceptor.LogInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

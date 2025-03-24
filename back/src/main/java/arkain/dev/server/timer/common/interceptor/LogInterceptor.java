@@ -1,4 +1,4 @@
-package goorm.dev.server.timer.common.interceptor;
+package arkain.dev.server.timer.common.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
