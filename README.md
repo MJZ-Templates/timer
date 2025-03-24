@@ -12,10 +12,14 @@ It also integrates **MongoDB** to manage data in a flexible way, allowing you to
 
 ## 1. Tech Stack
 
-- **Front-end**: [React](https://reactjs.org/)
-- **Back-end**: [Spring Boot](https://spring.io/projects/spring-boot)
-- **Database**: [MongoDB](https://www.mongodb.com/)
-- **Styling**: [Styled Components](https://styled-components.com/)
+- **Front-end**:
+  - [React](https://reactjs.org/)
+  - etc. axios, styled-components, react-icons, zustand
+- **Back-end**
+  - [Spring Boot](https://spring.io/projects/spring-boot)
+  - etc. spring data mongodb,lombok
+- **Database**
+  - [MongoDB](https://www.mongodb.com/)
 
 ---
 
