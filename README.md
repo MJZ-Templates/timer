@@ -59,29 +59,11 @@ However, **if you require relational models**, you can adapt this project to use
 
 ## 6. Getting Started
 
-1. **Install Front-End Dependencies**
-2. Install Back-End Dependencies
-3. Run MongoDB
+1. First, move to sh folder using `cd timer/sh` and start the mongoDB `./start_mongo.sh`
+  1. If the access is denied, use `chmod +x ./start_mongo.sh` and run the command `./start_mongo.sh` again.
+2. To run the application, click "Run Timer" from the menu bar in the top right.
+  1. Alternatively, you can start the server and client directly in the terminal.
+  2. go to `timer/back` and run the server background using `nohup ./gradlew bootRun > app.log 2>&1 &`
+  3. got o `../front` and run the client background using `pm2 start "npm run dev" --name timer-front`
+3. It there's an dependency error in your front application. run `npm i` to install the dependencies.
 
-- Make sure you have a running MongoDB instance (local or remote).
-
-```bash
-# 1. Update package index (Debian/Ubuntu)
-sudo apt-get update
-
-# 2. Install MongoDB (Debian/Ubuntu)
-sudo apt-get install -y mongodb
-
-# 3. Start MongoDB service
-sudo systemctl start mongodb
-
-# 4. Enable MongoDB to start on boot
-sudo systemctl enable mongodb
-
-# 5. Check if MongoDB is running
-sudo systemctl status mongodb
-
-# 6. Connect to the MongoDB shell
-mongo
-
-```
